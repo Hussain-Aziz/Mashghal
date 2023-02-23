@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mushaghal/pages/home/shop_items_body.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/dimensions.dart';
-import 'package:mushaghal/widgets/big_text.dart';
-import 'package:mushaghal/widgets/small_text.dart';
 
 class MainItemPage extends StatefulWidget {
   const MainItemPage({Key? key}) : super(key: key);
@@ -30,13 +28,12 @@ class _MainItemPageState extends State<MainItemPage> {
                     //creates as much space between as possible
                     children: [
                       Column(
-                        children: [
-                          BigText(text: "Dubai", color: AppColors.mainColor,),
-                          Row(
-                            children: [
-                              SmallText(text: "Change city", color: AppColors.mainBlackColor),
-                              const Icon(Icons.arrow_drop_down_rounded)
-                            ],
+                        children: const [
+                          SizedBox(
+                            width: 160,
+                            height: 40,
+                            child: Image(image: AssetImage("assets/images/mushaghal_logo.png"),
+                            ),
                           ),
                         ],
                       ),

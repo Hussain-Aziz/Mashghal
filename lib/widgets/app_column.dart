@@ -29,7 +29,7 @@ class AppColumn extends StatelessWidget {
             const SizedBox(width: 10),
             SmallText(text: "1287"),
             const SizedBox(width: 5),
-            SmallText(text: "comments"),
+            SmallText(text: "reviews"),
           ],
         ),
         SizedBox(height: Dimensions.l20),
