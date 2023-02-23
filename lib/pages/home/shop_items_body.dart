@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:mushaghal/pages/items/popular_item_detail.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/widgets/app_column.dart';
 import 'package:mushaghal/widgets/big_text.dart';
@@ -75,59 +76,65 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
         physics: NeverScrollableScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.fromLTRB(Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
-            child: Row(
-              children: [
-                Container(
-                  width: Dimensions.listViewImageSize,
-                  height: Dimensions.listViewImageSize,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.l20),
-                      color: Colors.white38,
-                      image: const DecorationImage(
-                          image: AssetImage("assets/images/placeHolder.png"),
-                          fit: BoxFit.cover
-                      )
-                  ),
-                ),
-                Expanded(
-                  child:
+          return InkWell(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PopularItemDetail()));
+            },
+            child: Container(
+              margin: EdgeInsets.fromLTRB(Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
+              child: Row(
+                children: [
                   Container(
-                    height: Dimensions.listViewTextContainerSize,
+                    width: Dimensions.listViewImageSize,
+                    height: Dimensions.listViewImageSize,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(Dimensions.l20),
-                          bottomRight: Radius.circular(Dimensions.l20)
-                      ),
-                      color: Colors.white,
+                        borderRadius: BorderRadius.circular(Dimensions.l20),
+                        color: Colors.white38,
+                        image: const DecorationImage(
+                            image: AssetImage("assets/images/placeHolder.png"),
+                            fit: BoxFit.cover
+                        )
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Dimensions.l10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          BigText(text: "Item $index Name"),
-                          SizedBox(height: Dimensions.l10),
-                          SmallText(text: "Item $index Desc"),
-                          SizedBox(height: Dimensions.l10),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
-                              IconAndTextWidget(icon: Icons.circle_sharp,
-                                  text: "Normal",
-                                  iconColor: AppColors.iconColor1),
-                              IconAndTextWidget(icon: Icons.access_time_rounded,
-                                  text: "32 min",
-                                  iconColor: AppColors.iconColor2),
-                            ],
-                          ),
-                        ],
+                  ),
+                  Expanded(
+                    child:
+                    Container(
+                      height: Dimensions.listViewTextContainerSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(Dimensions.l20),
+                            bottomRight: Radius.circular(Dimensions.l20)
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: Dimensions.l10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(text: "Item $index Name"),
+                            SizedBox(height: Dimensions.l10),
+                            SmallText(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Penatibus et magnis dis parturient.",
+                              overflow: TextOverflow.ellipsis),
+                            SizedBox(height: Dimensions.l10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: const [
+                                IconAndTextWidget(icon: Icons.circle_sharp,
+                                    text: "Normal",
+                                    iconColor: AppColors.iconColor1),
+                                IconAndTextWidget(icon: Icons.access_time_rounded,
+                                    text: "32 min",
+                                    iconColor: AppColors.iconColor2),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -158,51 +165,56 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
     // we wanna add text too below it and stack allows us to place on top of it
     return Transform(
       transform: matrix,
-      child: Stack(
-        children: [
-          Container(
-            height: height,
-            margin: EdgeInsets.symmetric(horizontal: Dimensions.l10), //for space between the scroll items
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.l30),
-                color: index.isEven ? const Color(0xFF69c5df) : const Color(0xDD9294cc),
-                //just in case image doesn't load
-                image: const DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage("assets/images/placeHolder.png"),
-                )),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-                height: Dimensions.pageViewTextHeight,
-                margin: EdgeInsets.fromLTRB(Dimensions.l30, 0, Dimensions.l30, Dimensions.l30),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.l20),
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color(0xFFe8e8e8),
-                          blurRadius: 5.0,
-                          offset: Offset(0,5) ///we want less shadow
-                      ),
-                      BoxShadow( ///remove left shadow
-                          color: Colors.white,
-                          offset: Offset(-5, 0)
-                      ),
-                      BoxShadow( ///remove right shadow
-                          color: Colors.white,
-                          offset: Offset(5, 0)
-                      ),
-                    ]
-                ),
-                child: Container(///for padding
-                  padding: EdgeInsets.fromLTRB(Dimensions.l15, Dimensions.l15, Dimensions.l15, 0),
-                  child: AppColumn(text: "Item Name"),
-                )
+      child: InkWell(
+        onTap: () async {
+          await Navigator.push(context, MaterialPageRoute(builder: (context) => PopularItemDetail()));
+        },
+        child: Stack(
+          children: [
+            Container(
+              height: height,
+              margin: EdgeInsets.symmetric(horizontal: Dimensions.l10), //for space between the scroll items
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.l30),
+                  color: index.isEven ? const Color(0xFF69c5df) : const Color(0xDD9294cc),
+                  //just in case image doesn't load
+                  image: const DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/placeHolder.png"),
+                  )),
             ),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                  height: Dimensions.pageViewTextHeight,
+                  margin: EdgeInsets.fromLTRB(Dimensions.l30, 0, Dimensions.l30, Dimensions.l30),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.l20),
+                      color: Colors.white,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Color(0xFFe8e8e8),
+                            blurRadius: 5.0,
+                            offset: Offset(0,5) ///we want less shadow
+                        ),
+                        BoxShadow( ///remove left shadow
+                            color: Colors.white,
+                            offset: Offset(-5, 0)
+                        ),
+                        BoxShadow( ///remove right shadow
+                            color: Colors.white,
+                            offset: Offset(5, 0)
+                        ),
+                      ]
+                  ),
+                  child: Container(///for padding
+                    padding: EdgeInsets.fromLTRB(Dimensions.l15, Dimensions.l15, Dimensions.l15, 0),
+                    child: AppColumn(text: "Item Name"),
+                  )
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

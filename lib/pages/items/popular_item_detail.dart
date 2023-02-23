@@ -37,8 +37,10 @@ class PopularItemDetail extends StatelessWidget {
                 top: Dimensions.l45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    AppIcon(icon: Icons.arrow_back),
+                  children: [
+                    IconButton(onPressed: () {
+                      Navigator.pop(context);
+                    }, icon: AppIcon(icon: Icons.arrow_back)),
                     AppIcon(icon: Icons.shopping_cart_checkout_outlined),
                   ],
                 )),
@@ -63,6 +65,8 @@ class PopularItemDetail extends StatelessWidget {
                         SizedBox(height: Dimensions.l20),
                         BigText(text: "Shop Name"),
                         SizedBox(height: Dimensions.l20),
+                        SmallText(text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                          , color: AppColors.paraColor, size: 15,),
                       ],
                     ),
                   ),

@@ -7,12 +7,14 @@ class SmallText extends StatelessWidget {
   final String text;
   double size;
   double height;
+  TextOverflow overflow;
 
   SmallText({Key? key,
     required this.text,
     this.color = AppColors.textColor,
     this.size = 12,
-    this.height = 1.2}) : super(key: key);
+    this.height = 1.2,
+    this.overflow = TextOverflow.visible}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class SmallText extends StatelessWidget {
         color: color,
         fontSize: size,
         height: height,
+        overflow: overflow,
       ),
     );
   }
