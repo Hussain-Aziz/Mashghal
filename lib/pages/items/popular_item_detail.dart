@@ -10,7 +10,9 @@ import '../../widgets/icon_and_text_widget.dart';
 import '../../widgets/small_text.dart';
 
 class PopularItemDetail extends StatelessWidget {
-  const PopularItemDetail({Key? key}) : super(key: key);
+  PopularItemDetail({Key? key, required this.id}) : super(key: key);
+
+  String id;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +25,12 @@ class PopularItemDetail extends StatelessWidget {
               right: 0,
               child: Container(
                 height: Dimensions.popularItemImageSize,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage("assets/images/placeHolder.png")
-                    )
+                child: Hero(
+                  tag: id,
+                  child: const Image(
+                      fit: BoxFit.cover,
+                      image: AssetImage("assets/images/placeHolder.png")
+                  ),
                 ),
               ),
             ),

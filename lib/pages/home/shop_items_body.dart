@@ -76,9 +76,10 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
         physics: NeverScrollableScrollPhysics(),
         itemCount: 10,
         itemBuilder: (context, index) {
+          String id = "Popular Item $index";
           return InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PopularItemDetail()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PopularItemDetail(id: id)));
             },
             child: Container(
               margin: EdgeInsets.fromLTRB(Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
@@ -90,10 +91,13 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.l20),
                         color: Colors.white38,
-                        image: const DecorationImage(
-                            image: AssetImage("assets/images/placeHolder.png"),
-                            fit: BoxFit.cover
-                        )
+                    ),
+                    child: Hero(
+                      tag: id,
+                      child: const Image(
+                          image: AssetImage("assets/images/placeHolder.png"),
+                          fit: BoxFit.cover
+                      ),
                     ),
                   ),
                   Expanded(
@@ -161,13 +165,15 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
     matrix = Matrix4.diagonal3Values(1, currentScale, 1)..setTranslationRaw(0, getHeightDiff(currentScale), 0);
 
 
+    String id = "Top Item $index"; //for hero
     //for 2 reasons, to make sure height is 220, if not container takes up full space, stack will not do that
     // we wanna add text too below it and stack allows us to place on top of it
     return Transform(
       transform: matrix,
       child: InkWell(
         onTap: () async {
-          await Navigator.push(context, MaterialPageRoute(builder: (context) => PopularItemDetail()));
+          final c = context;
+          await Navigator.push(context, MaterialPageRoute(builder: (context) => PopularItemDetail(id: id)));
         },
         child: Stack(
           children: [
@@ -177,11 +183,14 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.l30),
                   color: index.isEven ? const Color(0xFF69c5df) : const Color(0xDD9294cc),
-                  //just in case image doesn't load
-                  image: const DecorationImage(
-                    fit: BoxFit.cover,
-                    image: AssetImage("assets/images/placeHolder.png"),
-                  )),
+              ),
+              child: Hero(
+                tag: id,
+                child: const Image(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/images/placeHolder.png"),
+                ),
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
