@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/widgets/app_column.dart';
+import 'package:mushaghal/widgets/expandable_text.dart';
 
 import '../../utils/colors.dart';
 import '../../utils/dimensions.dart';
@@ -26,9 +28,7 @@ class PopularItemDetail extends StatelessWidget {
                 decoration: const BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/images/placeHolder.png")
-                    )
-                ),
+                        image: AssetImage("assets/images/placeHolder.png"))),
               ),
             ),
             Positioned(
@@ -50,29 +50,30 @@ class PopularItemDetail extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(Dimensions.l20),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(Dimensions.l20),
-                          topLeft: Radius.circular(Dimensions.l20)
-                      ),
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(Dimensions.l20),
+                        topLeft: Radius.circular(Dimensions.l20)),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AppColumn(text: "Item name"),
+                        const AppColumn(text: "Item name"),
                         SizedBox(height: Dimensions.l20),
                         BigText(text: "Shop Name"),
                         SizedBox(height: Dimensions.l20),
+                        const ExpandableTextWidget(
+                            text: Consts.longPlaceHolderDesc)
                       ],
                     ),
                   ),
-                )
-            )
+                ))
           ],
         ),
         bottomNavigationBar: Container(
           height: Dimensions.bottomBarHeight,
-          padding: EdgeInsets.symmetric(vertical: Dimensions.l30, horizontal: Dimensions.l20),
+          padding: EdgeInsets.symmetric(
+              vertical: Dimensions.l30, horizontal: Dimensions.l20),
           decoration: BoxDecoration(
             color: AppColors.buttonBackgroundColor,
             borderRadius: BorderRadius.only(
@@ -105,11 +106,12 @@ class PopularItemDetail extends StatelessWidget {
                     borderRadius: BorderRadius.circular(Dimensions.l20),
                     color: AppColors.mainColor,
                   ),
-                  child: BigText(text: "10 AED | Add", color: Colors.white,)
-              ),
+                  child: BigText(
+                    text: "10 AED | Add",
+                    color: Colors.white,
+                  )),
             ],
           ),
-        )
-    );
+        ));
   }
 }
