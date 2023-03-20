@@ -58,9 +58,9 @@ class RecomendedItemDetail extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: Dimensions.l20),
                   child: ExpandableTextWidget(
-                    text: Consts.longPlaceHolderDesc +
-                        Consts.longPlaceHolderDesc +
-                        Consts.longPlaceHolderDesc,
+                    text: AppConsts.longPlaceHolderDesc +
+                        AppConsts.longPlaceHolderDesc +
+                        AppConsts.longPlaceHolderDesc,
                   ),
                 ),
               ],

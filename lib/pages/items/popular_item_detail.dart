@@ -63,7 +63,7 @@ class PopularItemDetail extends StatelessWidget {
                         BigText(text: "Shop Name"),
                         SizedBox(height: Dimensions.l20),
                         const ExpandableTextWidget(
-                            text: Consts.longPlaceHolderDesc)
+                            text: AppConsts.longPlaceHolderDesc)
                       ],
                     ),
                   ),
