@@ -100,26 +100,30 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                 itemCount: recommendedProduct.recommendedProductList.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () => Get.toNamed(RouteHelper.getRecommendedItem()),
+                    onTap: () =>
+                        Get.toNamed(RouteHelper.getRecommendedItem(index)),
                     child: Container(
                       margin: EdgeInsets.fromLTRB(
                           Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
                       child: Row(
                         children: [
-                          Container(
-                            width: Dimensions.listViewImageSize,
-                            height: Dimensions.listViewImageSize,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.l20),
-                                color: Colors.white38,
-                                image: DecorationImage(
-                                    image: NetworkImage(AppConsts.baseUrl +
-                                        AppConsts.uploadUri +
-                                        recommendedProduct
-                                            .recommendedProductList[index]
-                                            .img!),
-                                    fit: BoxFit.cover)),
+                          Hero(
+                            tag: "recommended-item-$index",
+                            child: Container(
+                              width: Dimensions.listViewImageSize,
+                              height: Dimensions.listViewImageSize,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.circular(Dimensions.l20),
+                                  color: Colors.white38,
+                                  image: DecorationImage(
+                                      image: NetworkImage(AppConsts.baseUrl +
+                                          AppConsts.uploadUri +
+                                          recommendedProduct
+                                              .recommendedProductList[index]
+                                              .img!),
+                                      fit: BoxFit.cover)),
+                            ),
                           ),
                           Expanded(
                             child: Container(
@@ -205,23 +209,26 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
         children: [
           GestureDetector(
             onTap: () => Get.toNamed(RouteHelper.getPopularItem(index)),
-            child: Container(
-              height: height,
-              margin: EdgeInsets.symmetric(
-                  horizontal:
-                      Dimensions.l10), //for space between the scroll items
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.l30),
-                  color: index.isEven
-                      ? const Color(0xFF69c5df)
-                      : const Color(0xDD9294cc),
-                  //just in case image doesn't load
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(AppConsts.baseUrl +
-                        AppConsts.uploadUri +
-                        productModel.img!),
-                  )),
+            child: Hero(
+              tag: "popular-item-$index",
+              child: Container(
+                height: height,
+                margin: EdgeInsets.symmetric(
+                    horizontal:
+                        Dimensions.l10), //for space between the scroll items
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.l30),
+                    color: index.isEven
+                        ? const Color(0xFF69c5df)
+                        : const Color(0xDD9294cc),
+                    //just in case image doesn't load
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(AppConsts.baseUrl +
+                          AppConsts.uploadUri +
+                          productModel.img!),
+                    )),
+              ),
             ),
           ),
           Align(

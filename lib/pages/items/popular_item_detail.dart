@@ -27,14 +27,17 @@ class PopularItemDetail extends StatelessWidget {
             Positioned(
               left: 0,
               right: 0,
-              child: Container(
-                height: Dimensions.popularItemImageSize,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(AppConsts.baseUrl +
-                            AppConsts.uploadUri +
-                            product.img!))),
+              child: Hero(
+                tag: "popular-item-$pageId",
+                child: Container(
+                  height: Dimensions.popularItemImageSize,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(AppConsts.baseUrl +
+                              AppConsts.uploadUri +
+                              product.img!))),
+                ),
               ),
             ),
             Positioned(
@@ -58,6 +61,7 @@ class PopularItemDetail extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(Dimensions.l20),
                   decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topRight: Radius.circular(Dimensions.l20),
                         topLeft: Radius.circular(Dimensions.l20)),
@@ -114,7 +118,7 @@ class PopularItemDetail extends StatelessWidget {
                     color: AppColors.mainColor,
                   ),
                   child: BigText(
-                    text: "10 AED | Add",
+                    text: "${product.price} AED | Add",
                     color: Colors.white,
                   )),
             ],

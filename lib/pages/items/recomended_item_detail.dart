@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
@@ -8,11 +9,14 @@ import 'package:mushaghal/widgets/expandable_text.dart';
 import 'package:get/get.dart';
 import 'package:mushaghal/widgets/big_text.dart';
 
-class RecomendedItemDetail extends StatelessWidget {
-  const RecomendedItemDetail({Key? key}) : super(key: key);
+class RecommendedItemDetail extends StatelessWidget {
+  int pageId;
+  RecommendedItemDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -40,7 +44,7 @@ class RecomendedItemDetail extends StatelessWidget {
                       )),
                   child: Center(
                     child: BigText(
-                      text: "Item Name",
+                      text: product.name!,
                     ),
                   )),
             ),
@@ -48,22 +52,20 @@ class RecomendedItemDetail extends StatelessWidget {
             expandedHeight: 300,
             backgroundColor: AppColors.yellowColor,
             flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-              "assets/images/placeHolder.png",
-              width: double.maxFinite,
-              fit: BoxFit.cover,
-            )),
+                background: Hero(
+                    tag: "recommended-item-$pageId",
+                    child: Image.network(
+                      AppConsts.baseUrl + AppConsts.uploadUri + product.img!,
+                      width: double.maxFinite,
+                      fit: BoxFit.cover,
+                    ))),
           ),
           SliverToBoxAdapter(
             child: Column(
               children: [
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: Dimensions.l20),
-                  child: ExpandableTextWidget(
-                    text: AppConsts.longPlaceHolderDesc +
-                        AppConsts.longPlaceHolderDesc +
-                        AppConsts.longPlaceHolderDesc,
-                  ),
+                  child: ExpandableTextWidget(text: product.description!),
                 ),
               ],
             ),
@@ -84,7 +86,7 @@ class RecomendedItemDetail extends StatelessWidget {
                 iconColor: Colors.white,
               ),
               BigText(
-                text: "10 AED X 0",
+                text: "${product.price!} AED X 0",
                 color: AppColors.mainBlackColor,
                 size: Dimensions.l26,
               ),
@@ -129,7 +131,7 @@ class RecomendedItemDetail extends StatelessWidget {
                     color: AppColors.mainColor,
                   ),
                   child: BigText(
-                    text: "10 AED | Add",
+                    text: "${product.price} AED | Add",
                     color: Colors.white,
                   )),
             ],
