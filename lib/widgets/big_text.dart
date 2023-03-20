@@ -3,17 +3,18 @@ import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
-
-  Color? color; //to make color variable
+  final Color? color; //to make color variable
   final String text;
-  double size;
-  TextOverflow overflow;
+  final double size;
+  final TextOverflow overflow;
 
-  BigText({Key? key,
-    required this.text,
-    this.color = AppColors.mainBlackColor,
-    this.overflow = TextOverflow.ellipsis,
-    this.size = 20}) : super(key: key);
+  BigText(
+      {Key? key,
+      required this.text,
+      this.color = AppColors.mainBlackColor,
+      this.overflow = TextOverflow.ellipsis,
+      this.size = 20})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

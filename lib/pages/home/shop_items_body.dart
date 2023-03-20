@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:mushaghal/controllers/popular_product_controller.dart';
 import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/models/product_model.dart';
-import 'package:mushaghal/pages/items/popular_item_detail.dart';
-import 'package:mushaghal/pages/items/recomended_item_detail.dart';
 import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';

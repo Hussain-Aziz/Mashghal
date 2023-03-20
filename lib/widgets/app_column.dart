@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mushaghal/widgets/big_text.dart';
 import 'package:mushaghal/widgets/icon_and_text_widget.dart';
