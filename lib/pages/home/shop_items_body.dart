@@ -80,9 +80,9 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
           ),
         );
       }),
-      SizedBox(height: Dimensions.l30),
+      SizedBox(height: 30.scale()),
       Container(
-        margin: EdgeInsets.only(left: Dimensions.l30),
+        margin: EdgeInsets.only(left: 30.scale()),
         alignment: Alignment.centerLeft,
         child: BigText(text: "Recommended Items"),
       ),
@@ -102,7 +102,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                         Get.toNamed(RouteHelper.getRecommendedItem(index)),
                     child: Container(
                       margin: EdgeInsets.fromLTRB(
-                          Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
+                          20.scale(), 0, 20.scale(), 10.scale()),
                       child: Row(
                         children: [
                           Hero(
@@ -112,7 +112,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                               height: Dimensions.listViewImageSize,
                               decoration: BoxDecoration(
                                   borderRadius:
-                                      BorderRadius.circular(Dimensions.l20),
+                                      BorderRadius.circular(20.scale()),
                                   color: Colors.white38,
                                   image: DecorationImage(
                                       image: NetworkImage(AppConsts.baseUrl +
@@ -128,14 +128,13 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                               height: Dimensions.listViewTextContainerSize,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(Dimensions.l20),
-                                    bottomRight:
-                                        Radius.circular(Dimensions.l20)),
+                                    topRight: Radius.circular(20.scale()),
+                                    bottomRight: Radius.circular(20.scale())),
                                 color: Colors.white,
                               ),
                               child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: Dimensions.l10),
+                                    horizontal: 10.scale()),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -143,9 +142,9 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                         text: recommendedProduct
                                             .recommendedProductList[index]
                                             .name!),
-                                    SizedBox(height: Dimensions.l10),
+                                    SizedBox(height: 10.scale()),
                                     SmallText(text: "Item $index Desc"),
-                                    SizedBox(height: Dimensions.l10),
+                                    SizedBox(height: 10.scale()),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceAround,
@@ -213,9 +212,9 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                 height: height,
                 margin: EdgeInsets.symmetric(
                     horizontal:
-                        Dimensions.l10), //for space between the scroll items
+                        10.scale()), //for space between the scroll items
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.l30),
+                    borderRadius: BorderRadius.circular(30.scale()),
                     color: index.isEven
                         ? const Color(0xFF69c5df)
                         : const Color(0xDD9294cc),
@@ -233,10 +232,10 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
             alignment: Alignment.bottomCenter,
             child: Container(
                 height: Dimensions.pageViewTextHeight,
-                margin: EdgeInsets.fromLTRB(
-                    Dimensions.l30, 0, Dimensions.l30, Dimensions.l30),
+                margin:
+                    EdgeInsets.fromLTRB(30.scale(), 0, 30.scale(), 30.scale()),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.l20),
+                    borderRadius: BorderRadius.circular(20.scale()),
                     color: Colors.white,
                     boxShadow: const [
                       BoxShadow(
@@ -260,7 +259,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                 child: Container(
                   ///for padding
                   padding: EdgeInsets.fromLTRB(
-                      Dimensions.l15, Dimensions.l15, Dimensions.l15, 0),
+                      15.scale(), 15.scale(), 15.scale(), 0),
                   child: AppColumn(text: productModel.name!),
                 )),
           ),

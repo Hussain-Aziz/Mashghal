@@ -39,9 +39,9 @@ class PopularItemDetail extends StatelessWidget {
               ),
             ),
             Positioned(
-                left: Dimensions.l20,
-                right: Dimensions.l20,
-                top: Dimensions.l45,
+                left: 20.scale(),
+                right: 20.scale(),
+                top: 45.scale(),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -55,23 +55,23 @@ class PopularItemDetail extends StatelessWidget {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                top: Dimensions.popularItemImageSize - Dimensions.l20,
+                top: Dimensions.popularItemImageSize - 20.scale(),
                 child: Container(
-                  padding: EdgeInsets.all(Dimensions.l20),
+                  padding: EdgeInsets.all(20.scale()),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(Dimensions.l20),
-                        topLeft: Radius.circular(Dimensions.l20)),
+                        topRight: Radius.circular(20.scale()),
+                        topLeft: Radius.circular(20.scale())),
                   ),
                   child: SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AppColumn(text: product.name!),
-                        SizedBox(height: Dimensions.l20),
+                        SizedBox(height: 20.scale()),
                         BigText(text: "Shop Name"),
-                        SizedBox(height: Dimensions.l20),
+                        SizedBox(height: 20.scale()),
                         ExpandableTextWidget(text: product.description!)
                       ],
                     ),
@@ -84,21 +84,21 @@ class PopularItemDetail extends StatelessWidget {
           return Container(
             height: Dimensions.bottomBarHeight,
             padding: EdgeInsets.symmetric(
-                vertical: Dimensions.l30, horizontal: Dimensions.l20),
+                vertical: 30.scale(), horizontal: 20.scale()),
             decoration: BoxDecoration(
               color: AppColors.buttonBackgroundColor,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(Dimensions.l40),
-                topRight: Radius.circular(Dimensions.l40),
+                topLeft: Radius.circular(40.scale()),
+                topRight: Radius.circular(40.scale()),
               ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(Dimensions.l20),
+                  padding: EdgeInsets.all(20.scale()),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.l20),
+                    borderRadius: BorderRadius.circular(20.scale()),
                     color: Colors.white,
                   ),
                   child: Row(
@@ -108,9 +108,9 @@ class PopularItemDetail extends StatelessWidget {
                               decrement: true),
                           child:
                               Icon(Icons.remove, color: AppColors.signColor)),
-                      SizedBox(width: Dimensions.l10),
+                      SizedBox(width: 10.scale()),
                       BigText(text: "${popularProductController.quantity}"),
-                      SizedBox(width: Dimensions.l10),
+                      SizedBox(width: 10.scale()),
                       GestureDetector(
                           onTap: () {
                             popularProductController.setQuantity();
@@ -120,9 +120,9 @@ class PopularItemDetail extends StatelessWidget {
                   ),
                 ),
                 Container(
-                    padding: EdgeInsets.all(Dimensions.l20),
+                    padding: EdgeInsets.all(20.scale()),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.l20),
+                      borderRadius: BorderRadius.circular(20.scale()),
                       color: AppColors.mainColor,
                     ),
                     child: BigText(

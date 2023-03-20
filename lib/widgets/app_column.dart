@@ -8,20 +8,23 @@ import '../utils/dimensions.dart';
 
 class AppColumn extends StatelessWidget {
   final String text;
-  const AppColumn({Key? key,
-    required this.text}) : super(key: key);
+  const AppColumn({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BigText(text: text, size: Dimensions.l26),
-        SizedBox(height: Dimensions.l10),
+        BigText(text: text, size: 26.scale()),
+        SizedBox(height: 10.scale()),
         Row(
           children: [
-            Wrap( ///horizontally create multiple items
-              children: List.generate(5, (index) => const Icon(Icons.star, color: AppColors.mainColor, size: 15)),
+            Wrap(
+              ///horizontally create multiple items
+              children: List.generate(
+                  5,
+                  (index) => const Icon(Icons.star,
+                      color: AppColors.mainColor, size: 15)),
             ),
             const SizedBox(width: 10),
             SmallText(text: "4.5"),
@@ -31,14 +34,16 @@ class AppColumn extends StatelessWidget {
             SmallText(text: "reviews"),
           ],
         ),
-        SizedBox(height: Dimensions.l20),
+        SizedBox(height: 20.scale()),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
-            IconAndTextWidget(icon: Icons.circle_sharp,
+            IconAndTextWidget(
+                icon: Icons.circle_sharp,
                 text: "Normal",
                 iconColor: AppColors.iconColor1),
-            IconAndTextWidget(icon: Icons.access_time_rounded,
+            IconAndTextWidget(
+                icon: Icons.access_time_rounded,
                 text: "32 min",
                 iconColor: AppColors.iconColor2),
           ],

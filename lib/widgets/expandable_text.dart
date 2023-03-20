@@ -35,7 +35,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: Dimensions.l80),
+      margin: EdgeInsets.only(bottom: 80.scale()),
       child: secondHalf.isEmpty
           ? SmallText(
               size: 16,
