@@ -1,13 +1,12 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
+import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/utils/dimensions.dart';
 import 'package:mushaghal/widgets/app_icon.dart';
 import 'package:mushaghal/widgets/expandable_text.dart';
-
-import '../../widgets/big_text.dart';
+import 'package:get/get.dart';
+import 'package:mushaghal/widgets/big_text.dart';
 
 class RecomendedItemDetail extends StatelessWidget {
   const RecomendedItemDetail({Key? key}) : super(key: key);
@@ -19,11 +18,14 @@ class RecomendedItemDetail extends StatelessWidget {
         slivers: [
           SliverAppBar(
             toolbarHeight: 80,
+            automaticallyImplyLeading: false,
             title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(icon: Icons.arrow_back),
                   AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                  GestureDetector(
+                      onTap: () => Get.toNamed(RouteHelper.getInitial()),
+                      child: AppIcon(icon: Icons.arrow_back)),
                 ]),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(20),

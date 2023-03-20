@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:mushaghal/controllers/popular_product_controller.dart';
-import 'package:mushaghal/controllers/recommended_product_controller%20copy.dart';
+import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/data/api/api_client.dart';
 import 'package:mushaghal/data/repository/popular_product_repo.dart';
-import 'package:mushaghal/data/repository/recommended_product_repo%20copy.dart';
+import 'package:mushaghal/data/repository/recommended_product_repo.dart';
 import 'package:mushaghal/utils/consts.dart';
 
 Future<void> init() async {

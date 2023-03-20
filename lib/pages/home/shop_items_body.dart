@@ -2,9 +2,11 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mushaghal/controllers/popular_product_controller.dart';
-import 'package:mushaghal/controllers/recommended_product_controller%20copy.dart';
+import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/models/product_model.dart';
+import 'package:mushaghal/pages/items/popular_item_detail.dart';
 import 'package:mushaghal/pages/items/recomended_item_detail.dart';
+import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/widgets/app_column.dart';
@@ -97,64 +99,72 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: recommendedProduct.recommendedProductList.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.fromLTRB(
-                        Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: Dimensions.listViewImageSize,
-                          height: Dimensions.listViewImageSize,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.l20),
-                              color: Colors.white38,
-                              image: DecorationImage(
-                                  image: NetworkImage(AppConsts.baseUrl +
-                                      AppConsts.uploadUri +
-                                      recommendedProduct
-                                          .recommendedProductList[index].img!),
-                                  fit: BoxFit.cover)),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: Dimensions.listViewTextContainerSize,
+                  return GestureDetector(
+                    onTap: () => Get.toNamed(RouteHelper.getRecommendedItem()),
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(
+                          Dimensions.l20, 0, Dimensions.l20, Dimensions.l10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: Dimensions.listViewImageSize,
+                            height: Dimensions.listViewImageSize,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(Dimensions.l20),
-                                  bottomRight: Radius.circular(Dimensions.l20)),
-                              color: Colors.white,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions.l10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  BigText(text: recommendedProduct.recommendedProductList[index].name!),
-                                  SizedBox(height: Dimensions.l10),
-                                  SmallText(text: "Item $index Desc"),
-                                  SizedBox(height: Dimensions.l10),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: const [
-                                      IconAndTextWidget(
-                                          icon: Icons.circle_sharp,
-                                          text: "Normal",
-                                          iconColor: AppColors.iconColor1),
-                                      IconAndTextWidget(
-                                          icon: Icons.access_time_rounded,
-                                          text: "32 min",
-                                          iconColor: AppColors.iconColor2),
-                                    ],
-                                  ),
-                                ],
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.l20),
+                                color: Colors.white38,
+                                image: DecorationImage(
+                                    image: NetworkImage(AppConsts.baseUrl +
+                                        AppConsts.uploadUri +
+                                        recommendedProduct
+                                            .recommendedProductList[index]
+                                            .img!),
+                                    fit: BoxFit.cover)),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: Dimensions.listViewTextContainerSize,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(Dimensions.l20),
+                                    bottomRight:
+                                        Radius.circular(Dimensions.l20)),
+                                color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Dimensions.l10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BigText(
+                                        text: recommendedProduct
+                                            .recommendedProductList[index]
+                                            .name!),
+                                    SizedBox(height: Dimensions.l10),
+                                    SmallText(text: "Item $index Desc"),
+                                    SizedBox(height: Dimensions.l10),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: const [
+                                        IconAndTextWidget(
+                                            icon: Icons.circle_sharp,
+                                            text: "Normal",
+                                            iconColor: AppColors.iconColor1),
+                                        IconAndTextWidget(
+                                            icon: Icons.access_time_rounded,
+                                            text: "32 min",
+                                            iconColor: AppColors.iconColor2),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -193,23 +203,26 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-            height: height,
-            margin: EdgeInsets.symmetric(
-                horizontal:
-                    Dimensions.l10), //for space between the scroll items
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.l30),
-                color: index.isEven
-                    ? const Color(0xFF69c5df)
-                    : const Color(0xDD9294cc),
-                //just in case image doesn't load
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(AppConsts.baseUrl +
-                      AppConsts.uploadUri +
-                      productModel.img!),
-                )),
+          GestureDetector(
+            onTap: () => Get.toNamed(RouteHelper.getPopularItem(index)),
+            child: Container(
+              height: height,
+              margin: EdgeInsets.symmetric(
+                  horizontal:
+                      Dimensions.l10), //for space between the scroll items
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.l30),
+                  color: index.isEven
+                      ? const Color(0xFF69c5df)
+                      : const Color(0xDD9294cc),
+                  //just in case image doesn't load
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(AppConsts.baseUrl +
+                        AppConsts.uploadUri +
+                        productModel.img!),
+                  )),
+            ),
           ),
           Align(
             alignment: Alignment.bottomCenter,

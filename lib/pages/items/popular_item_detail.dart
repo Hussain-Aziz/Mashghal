@@ -1,21 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mushaghal/controllers/popular_product_controller.dart';
+import 'package:mushaghal/pages/home/main_item_page.dart';
+import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/widgets/app_column.dart';
 import 'package:mushaghal/widgets/expandable_text.dart';
-
-import '../../utils/colors.dart';
-import '../../utils/dimensions.dart';
-import '../../widgets/app_icon.dart';
-import '../../widgets/big_text.dart';
-import '../../widgets/icon_and_text_widget.dart';
-import '../../widgets/small_text.dart';
+import 'package:get/get.dart';
+import 'package:mushaghal/utils/colors.dart';
+import 'package:mushaghal/utils/dimensions.dart';
+import 'package:mushaghal/widgets/app_icon.dart';
+import 'package:mushaghal/widgets/big_text.dart';
 
 class PopularItemDetail extends StatelessWidget {
-  const PopularItemDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularItemDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<PopularProductController>().popularProductList[pageId];
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -25,10 +29,12 @@ class PopularItemDetail extends StatelessWidget {
               right: 0,
               child: Container(
                 height: Dimensions.popularItemImageSize,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage("assets/images/placeHolder.png"))),
+                        image: NetworkImage(AppConsts.baseUrl +
+                            AppConsts.uploadUri +
+                            product.img!))),
               ),
             ),
             Positioned(
@@ -37,8 +43,10 @@ class PopularItemDetail extends StatelessWidget {
                 top: Dimensions.l45,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    AppIcon(icon: Icons.arrow_back),
+                  children: [
+                    GestureDetector(
+                        onTap: () => Get.toNamed(RouteHelper.getInitial()),
+                        child: AppIcon(icon: Icons.arrow_back)),
                     AppIcon(icon: Icons.shopping_cart_checkout_outlined),
                   ],
                 )),
@@ -58,12 +66,11 @@ class PopularItemDetail extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const AppColumn(text: "Item name"),
+                        AppColumn(text: product.name!),
                         SizedBox(height: Dimensions.l20),
                         BigText(text: "Shop Name"),
                         SizedBox(height: Dimensions.l20),
-                        const ExpandableTextWidget(
-                            text: AppConsts.longPlaceHolderDesc)
+                        ExpandableTextWidget(text: product.description!)
                       ],
                     ),
                   ),
