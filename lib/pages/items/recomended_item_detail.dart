@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mushaghal/controllers/recommended_product_controller.dart';
-import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/utils/dimensions.dart';
@@ -10,8 +9,8 @@ import 'package:get/get.dart';
 import 'package:mushaghal/widgets/big_text.dart';
 
 class RecommendedItemDetail extends StatelessWidget {
-  int pageId;
-  RecommendedItemDetail({Key? key, required this.pageId}) : super(key: key);
+  final int pageId;
+  RecommendedItemDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +27,7 @@ class RecommendedItemDetail extends StatelessWidget {
                 children: [
                   AppIcon(icon: Icons.shopping_cart_checkout_outlined),
                   GestureDetector(
-                      onTap: () => Get.toNamed(RouteHelper.getInitial()),
+                      onTap: () => Get.back(),
                       child: AppIcon(icon: Icons.arrow_back)),
                 ]),
             bottom: PreferredSize(
@@ -72,72 +71,76 @@ class RecommendedItemDetail extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: Column(mainAxisSize: MainAxisSize.min, children: [
-        Container(
-          padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.l20 * 2.5, vertical: Dimensions.l10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppIcon(
-                icon: Icons.remove,
-                backgroundColor: AppColors.mainColor,
-                iconSize: Dimensions.l24,
-                iconColor: Colors.white,
+      bottomNavigationBar: GetBuilder<RecommendedProductController>(
+        builder: (recommendedProductController) {
+          return Column(mainAxisSize: MainAxisSize.min, children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: Dimensions.l20 * 2.5, vertical: Dimensions.l10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppIcon(
+                    icon: Icons.remove,
+                    backgroundColor: AppColors.mainColor,
+                    iconSize: Dimensions.l24,
+                    iconColor: Colors.white,
+                  ),
+                  BigText(
+                    text: "${product.price!} AED X ${recommendedProductController.quantity}",
+                    color: AppColors.mainBlackColor,
+                    size: Dimensions.l26,
+                  ),
+                  AppIcon(
+                    icon: Icons.add,
+                    backgroundColor: AppColors.mainColor,
+                    iconSize: Dimensions.l24,
+                    iconColor: Colors.white,
+                  ),
+                ],
               ),
-              BigText(
-                text: "${product.price!} AED X 0",
-                color: AppColors.mainBlackColor,
-                size: Dimensions.l26,
-              ),
-              AppIcon(
-                icon: Icons.add,
-                backgroundColor: AppColors.mainColor,
-                iconSize: Dimensions.l24,
-                iconColor: Colors.white,
-              ),
-            ],
-          ),
-        ),
-        Container(
-          height: Dimensions.bottomBarHeight,
-          padding: EdgeInsets.symmetric(
-              vertical: Dimensions.l30, horizontal: Dimensions.l20),
-          decoration: BoxDecoration(
-            color: AppColors.buttonBackgroundColor,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(Dimensions.l40),
-              topRight: Radius.circular(Dimensions.l40),
             ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  padding: EdgeInsets.all(Dimensions.l20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.l20),
-                    color: Colors.white,
-                  ),
-                  child: Icon(
-                    Icons.favorite,
-                    color: AppColors.mainColor,
-                    size: Dimensions.l40,
-                  )),
-              Container(
-                  padding: EdgeInsets.all(Dimensions.l20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.l20),
-                    color: AppColors.mainColor,
-                  ),
-                  child: BigText(
-                    text: "${product.price} AED | Add",
-                    color: Colors.white,
-                  )),
-            ],
-          ),
-        )
-      ]),
+            Container(
+              height: Dimensions.bottomBarHeight,
+              padding: EdgeInsets.symmetric(
+                  vertical: Dimensions.l30, horizontal: Dimensions.l20),
+              decoration: BoxDecoration(
+                color: AppColors.buttonBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(Dimensions.l40),
+                  topRight: Radius.circular(Dimensions.l40),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      padding: EdgeInsets.all(Dimensions.l20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.l20),
+                        color: Colors.white,
+                      ),
+                      child: Icon(
+                        Icons.favorite,
+                        color: AppColors.mainColor,
+                        size: Dimensions.l40,
+                      )),
+                  Container(
+                      padding: EdgeInsets.all(Dimensions.l20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.l20),
+                        color: AppColors.mainColor,
+                      ),
+                      child: BigText(
+                        text: "${product.price} AED | Add",
+                        color: Colors.white,
+                      )),
+                ],
+              ),
+            )
+          ]);
+        }
+      ),
     );
   }
 }
