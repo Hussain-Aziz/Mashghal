@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:mushaghal/controllers/cart_controller.dart';
 import 'package:mushaghal/controllers/popular_product_controller.dart';
 import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/data/api/api_client.dart';
+import 'package:mushaghal/data/repository/cart_repo.dart';
 import 'package:mushaghal/data/repository/popular_product_repo.dart';
 import 'package:mushaghal/data/repository/recommended_product_repo.dart';
 import 'package:mushaghal/utils/consts.dart';
@@ -11,8 +13,10 @@ Future<void> init() async {
 
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));
+  Get.lazyPut(() => CartRepo());
 
   Get.lazyPut(() => PopularProductController(popularProductRepo: Get.find()));
   Get.lazyPut(
       () => RecommendedProductController(recommendedProductRepo: Get.find()));
+  Get.lazyPut(() => CartController(cartRepo: Get.find()));
 }

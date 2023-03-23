@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mushaghal/controllers/cart_controller.dart';
 import 'package:mushaghal/controllers/popular_product_controller.dart';
 import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/widgets/app_column.dart';
@@ -17,7 +18,8 @@ class PopularItemDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var product =
         Get.find<PopularProductController>().popularProductList[pageId];
-    Get.find<PopularProductController>().initProduct();
+    Get.find<PopularProductController>()
+        .initProduct(Get.find<CartController>());
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -125,10 +127,15 @@ class PopularItemDetail extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.scale()),
                       color: AppColors.mainColor,
                     ),
-                    child: BigText(
-                      text:
-                          "${product.price! * popularProductController.quantity} AED | Add",
-                      color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () {
+                        popularProductController.addItem(product);
+                      },
+                      child: BigText(
+                        text:
+                            "${product.price! * popularProductController.quantity} AED | Add",
+                        color: Colors.white,
+                      ),
                     )),
               ],
             ),
