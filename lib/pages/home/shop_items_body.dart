@@ -143,7 +143,10 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                             .recommendedProductList[index]
                                             .name!),
                                     SizedBox(height: 10.scale()),
-                                    SmallText(text: "Item $index Desc"),
+                                    SmallText(
+                                        text: recommendedProduct
+                                            .recommendedProductList[index]
+                                            .description!),
                                     SizedBox(height: 10.scale()),
                                     Row(
                                       mainAxisAlignment:

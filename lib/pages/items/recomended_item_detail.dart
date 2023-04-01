@@ -25,10 +25,10 @@ class RecommendedItemDetail extends StatelessWidget {
             title: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(icon: Icons.shopping_cart_checkout_outlined),
                   GestureDetector(
                       onTap: () => Get.back(),
                       child: AppIcon(icon: Icons.arrow_back)),
+                      AppIcon(icon: Icons.shopping_cart_checkout_outlined),
                 ]),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(20),
