@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:mushaghal/controllers/cart_controller.dart';
 import 'package:mushaghal/controllers/popular_product_controller.dart';
 import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/pages/home/main_item_page.dart';
@@ -18,17 +19,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
-    return GetMaterialApp(
-      title: AppConsts.appName,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: MainItemPage(),
-      initialRoute: RouteHelper.initial,
-      getPages: RouteHelper.routes,
-    );
+    Get.find<PopularProductController>().getProductList();
+    Get.find<RecommendedProductController>().getProductList();
+    return GetBuilder<CartController>(builder: (_) {
+      return GetMaterialApp(
+        title: AppConsts.appName,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: MainItemPage(),
+        initialRoute: RouteHelper.initial,
+        getPages: RouteHelper.routes,
+      );
+    });
   }
 }

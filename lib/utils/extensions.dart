@@ -16,3 +16,12 @@ extension ClampWithWarning on int {
     return this;
   }
 }
+
+class GetxUtils{
+  static void SnackBar(String title, {String desc = ""}) {
+    Get.snackbar(title, desc,
+        duration: Duration(milliseconds: 1000),
+        animationDuration: Duration(milliseconds: 250),
+        backgroundColor: Colors.transparent);
+  }
+}

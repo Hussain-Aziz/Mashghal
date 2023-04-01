@@ -54,11 +54,11 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                 height: Dimensions.pageViewHeight,
                 child: PageView.builder(
                     //for the scrollable thing
-                    itemCount: popularProducts.popularProductList.length,
+                    itemCount: popularProducts.productList.length,
                     controller: pageController,
                     itemBuilder: (context, position) {
-                      return buildHorizontalScrollingItem(position,
-                          popularProducts.popularProductList[position]);
+                      return buildHorizontalScrollingItem(
+                          position, popularProducts.productList[position]);
                     }),
               )
             : CircularProgressIndicator(
@@ -67,9 +67,9 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
       }),
       GetBuilder<PopularProductController>(builder: (popularProducts) {
         return DotsIndicator(
-          dotsCount: popularProducts.popularProductList.length <= 0
+          dotsCount: popularProducts.productList.length <= 0
               ? 1
-              : popularProducts.popularProductList.length,
+              : popularProducts.productList.length,
           position: currentPage,
           decorator: DotsDecorator(
             activeColor: AppColors.mainColor,
@@ -95,7 +95,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
 
                 ///makes it not possible to scroll the list. you have to scroll how its parent scrolls
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: recommendedProduct.recommendedProductList.length,
+                itemCount: recommendedProduct.productList.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () =>
@@ -118,8 +118,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                       image: NetworkImage(AppConsts.baseUrl +
                                           AppConsts.uploadUri +
                                           recommendedProduct
-                                              .recommendedProductList[index]
-                                              .img!),
+                                              .productList[index].img!),
                                       fit: BoxFit.cover)),
                             ),
                           ),
@@ -140,13 +139,11 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                   children: [
                                     BigText(
                                         text: recommendedProduct
-                                            .recommendedProductList[index]
-                                            .name!),
+                                            .productList[index].name!),
                                     SizedBox(height: 10.scale()),
                                     SmallText(
                                         text: recommendedProduct
-                                            .recommendedProductList[index]
-                                            .description!),
+                                            .productList[index].description!),
                                     SizedBox(height: 10.scale()),
                                     Row(
                                       mainAxisAlignment:

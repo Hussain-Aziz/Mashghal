@@ -16,10 +16,9 @@ class PopularItemDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var product =
-        Get.find<PopularProductController>().popularProductList[pageId];
+    var product = Get.find<PopularProductController>().productList[pageId];
     Get.find<PopularProductController>()
-        .initProduct(Get.find<CartController>());
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -50,7 +49,34 @@ class PopularItemDetail extends StatelessWidget {
                     GestureDetector(
                         onTap: () => Get.back(),
                         child: AppIcon(icon: Icons.arrow_back)),
-                    AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                    GetBuilder<PopularProductController>(builder: (controller) {
+                      var items =
+                          Get.find<PopularProductController>().totalCartItems;
+                      return Stack(
+                        children: [
+                          AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                          if (items > 0) ...[
+                            Positioned(
+                                right: 0,
+                                top: 0,
+                                child: AppIcon(
+                                  icon: Icons.circle,
+                                  size: 20,
+                                  iconColor: Colors.transparent,
+                                  backgroundColor: AppColors.mainColor,
+                                )),
+                            Positioned(
+                                right: 6,
+                                top: 3,
+                                child: BigText(
+                                  text: items.toString(),
+                                  size: 12,
+                                  color: Colors.white,
+                                )),
+                          ]
+                        ],
+                      );
+                    }),
                   ],
                 )),
             Positioned(
@@ -106,16 +132,16 @@ class PopularItemDetail extends StatelessWidget {
                   child: Row(
                     children: [
                       GestureDetector(
-                          onTap: () => popularProductController.setQuantity(
+                          onTap: () => popularProductController.addQuantity(
                               decrement: true),
                           child:
                               Icon(Icons.remove, color: AppColors.signColor)),
                       SizedBox(width: 10.scale()),
-                      BigText(text: "${popularProductController.quantity}"),
+                      BigText(text: "${popularProductController.totalItems}"),
                       SizedBox(width: 10.scale()),
                       GestureDetector(
                           onTap: () {
-                            popularProductController.setQuantity();
+                            popularProductController.addQuantity();
                           },
                           child: Icon(Icons.add, color: AppColors.signColor)),
                     ],
@@ -132,8 +158,7 @@ class PopularItemDetail extends StatelessWidget {
                         popularProductController.addItem(product);
                       },
                       child: BigText(
-                        text:
-                            "${product.price! * popularProductController.quantity} AED | Add",
+                        text: "AED ${product.price} | Add",
                         color: Colors.white,
                       ),
                     )),

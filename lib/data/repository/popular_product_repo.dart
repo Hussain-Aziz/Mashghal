@@ -1,13 +1,12 @@
 import 'package:get/get.dart';
 import 'package:mushaghal/data/api/api_client.dart';
+import 'package:mushaghal/data/repository/product_repo.dart';
 import 'package:mushaghal/utils/consts.dart';
 
-class PopularProductRepo extends GetxService {
-  final ApiClient apiClient;
+class PopularProductRepo extends ProductRepo {
+  PopularProductRepo({required super.apiClient});
 
-  PopularProductRepo({required this.apiClient});
-
-  Future<Response> getPopularProductList() async {
+  Future<Response> getProductList() async {
     return await apiClient.getData(AppConsts.popularProductUri);
   }
 }

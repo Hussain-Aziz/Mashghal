@@ -27,5 +27,22 @@ class CartController extends GetxController {
               isExists: true,
               time: DateTime.now().toString()));
     }
+    if (_items[product.id]!.quantity == 0) {
+      _items.remove(product.id);
+    }
+  }
+
+  bool existsInCart(ProductModel product) {
+    return _items.containsKey(product.id);
+  }
+
+  int getQuantity(ProductModel product) {
+    return existsInCart(product) ? _items[product.id]!.quantity! : 0;
+  }
+
+  int get totalItems {
+    int total = 0;
+    _items.forEach((key, value) => total += value.quantity!);
+    return total;
   }
 }

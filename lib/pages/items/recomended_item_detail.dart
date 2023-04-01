@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mushaghal/controllers/cart_controller.dart';
 import 'package:mushaghal/controllers/recommended_product_controller.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
@@ -14,8 +15,9 @@ class RecommendedItemDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var product =
-        Get.find<RecommendedProductController>().recommendedProductList[pageId];
+    var product = Get.find<RecommendedProductController>().productList[pageId];
+    Get.find<RecommendedProductController>()
+        .initProduct(product, Get.find<CartController>());
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -23,13 +25,41 @@ class RecommendedItemDetail extends StatelessWidget {
             toolbarHeight: 80,
             automaticallyImplyLeading: false,
             title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                      onTap: () => Get.back(),
-                      child: AppIcon(icon: Icons.arrow_back)),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                    onTap: () => Get.back(),
+                    child: AppIcon(icon: Icons.arrow_back)),
+                GetBuilder<RecommendedProductController>(builder: (controller) {
+                  var items =
+                      Get.find<RecommendedProductController>().totalCartItems;
+                  return Stack(
+                    children: [
                       AppIcon(icon: Icons.shopping_cart_checkout_outlined),
-                ]),
+                      if (items > 0) ...[
+                        Positioned(
+                            right: 0,
+                            top: 0,
+                            child: AppIcon(
+                              icon: Icons.circle,
+                              size: 20,
+                              iconColor: Colors.transparent,
+                              backgroundColor: AppColors.mainColor,
+                            )),
+                        Positioned(
+                            right: 6,
+                            top: 3,
+                            child: BigText(
+                              text: items.toString(),
+                              size: 12,
+                              color: Colors.white,
+                            )),
+                      ]
+                    ],
+                  );
+                }),
+              ],
+            ),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(20),
               child: Container(
@@ -76,28 +106,36 @@ class RecommendedItemDetail extends StatelessWidget {
         return Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             padding: EdgeInsets.symmetric(
-                horizontal: 20.scale() * 2.5, vertical: 10.scale()),
+                horizontal: 50.scale(), vertical: 10.scale()),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(
-                  icon: Icons.remove,
-                  backgroundColor: AppColors.mainColor,
-                  iconSize: 24.scale(),
-                  iconColor: Colors.white,
+                GestureDetector(
+                  onTap: () =>
+                      recommendedProductController.addQuantity(decrement: true),
+                  child: AppIcon(
+                    icon: Icons.remove,
+                    backgroundColor: AppColors.mainColor,
+                    iconSize: 24.scale(),
+                    iconColor: Colors.white,
+                  ),
                 ),
                 BigText(
                   text:
-                      "${product.price!} AED X ${recommendedProductController.quantity}",
+                      "${product.price!} AED X ${recommendedProductController.totalItems}",
                   color: AppColors.mainBlackColor,
                   size: 26.scale(),
                 ),
-                AppIcon(
-                  icon: Icons.add,
-                  backgroundColor: AppColors.mainColor,
-                  iconSize: 24.scale(),
-                  iconColor: Colors.white,
-                ),
+                GestureDetector(
+                    onTap: () {
+                      recommendedProductController.addQuantity();
+                    },
+                    child: AppIcon(
+                      icon: Icons.add,
+                      backgroundColor: AppColors.mainColor,
+                      iconSize: 24.scale(),
+                      iconColor: Colors.white,
+                    )),
               ],
             ),
           ),
@@ -132,9 +170,13 @@ class RecommendedItemDetail extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20.scale()),
                       color: AppColors.mainColor,
                     ),
-                    child: BigText(
-                      text: "${product.price} AED | Add",
-                      color: Colors.white,
+                    child: GestureDetector(
+                      onTap: () =>
+                          recommendedProductController.addItem(product),
+                      child: BigText(
+                        text: "${product.price} AED | Add",
+                        color: Colors.white,
+                      ),
                     )),
               ],
             ),

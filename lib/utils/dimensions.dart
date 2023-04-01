@@ -10,7 +10,7 @@ class Dimensions {
   static double listViewImageSize = 120.scale(horizontal: true);
   static double listViewTextContainerSize = 100.scale(horizontal: true);
   static double popularItemImageSize = 350.scale();
-  static double bottomBarHeight = 120.scale();
+  static double bottomBarHeight = 130.scale();
 }
 
 extension ScaleWithScreenDouble on double {
