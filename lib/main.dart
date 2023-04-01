@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mushaghal/controllers/cart_controller.dart';
-import 'package:mushaghal/controllers/popular_product_controller.dart';
-import 'package:mushaghal/controllers/recommended_product_controller.dart';
+import 'package:mushaghal/controllers/product_controller.dart';
 import 'package:mushaghal/pages/home/main_item_page.dart';
 import 'package:mushaghal/helper/dependencies.dart' as dep;
 import 'package:mushaghal/routes/route_helper.dart';
@@ -19,8 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<PopularProductController>().getProductList();
-    Get.find<RecommendedProductController>().getProductList();
+    Get.find<ProductController>().fetchProductList();
     return GetBuilder<CartController>(builder: (_) {
       return GetMaterialApp(
         title: AppConsts.appName,

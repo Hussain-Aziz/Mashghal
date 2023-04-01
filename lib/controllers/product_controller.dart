@@ -5,13 +5,25 @@ import 'package:mushaghal/models/product.dart';
 import 'package:mushaghal/models/product_model.dart';
 import 'package:mushaghal/utils/extensions.dart';
 
-abstract class ProductController<T> extends GetxController {
-  final T productRepo;
+enum ProductType {
+  popular,
+  recommended,
+}
+
+class ProductController extends GetxController {
+  final ProductRepo productRepo;
 
   ProductController({required this.productRepo});
 
   List<ProductModel> _productList = [];
   List<ProductModel> get productList => _productList;
+  List<ProductModel> get popularProductList =>
+      _productList.where((e) => e.type_id == ProductType.popular.index).toList();
+  List<ProductModel> get recommendedProductList => _productList
+      .where((e) => e.type_id == ProductType.recommended.index)
+      .toList();
+  List<ProductModel> getProductList(ProductType type) =>
+      _productList.where((e) => e.type_id == type.index).toList();
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
   int _tempQuantity = 0;
@@ -19,9 +31,8 @@ abstract class ProductController<T> extends GetxController {
   int get totalItems => _inCartItems + _tempQuantity;
   late CartController _cart;
 
-  Future<void> getProductList() async {
-    ;
-    Response response = await (productRepo as ProductRepo).getProductList();
+  Future<void> fetchProductList() async {
+    Response response = await productRepo.getProductList();
     if (response.statusCode == 200) {
       _productList = [];
       _productList.addAll(Product.fromJson(response.body).products);

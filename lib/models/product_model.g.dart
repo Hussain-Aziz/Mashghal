@@ -16,7 +16,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       location: json['location'] as String?,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
-      typeId: json['typeId'] as int?,
+      type_id: json['type_id'] as int?,
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
@@ -30,5 +30,5 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'location': instance.location,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
-      'typeId': instance.typeId,
+      'type_id': instance.type_id,
     };

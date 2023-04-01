@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mushaghal/controllers/cart_controller.dart';
-import 'package:mushaghal/controllers/recommended_product_controller.dart';
+import 'package:mushaghal/controllers/product_controller.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/utils/dimensions.dart';
@@ -9,14 +9,16 @@ import 'package:mushaghal/widgets/expandable_text.dart';
 import 'package:get/get.dart';
 import 'package:mushaghal/widgets/big_text.dart';
 
-class RecommendedItemDetail extends StatelessWidget {
+class ItemDetail extends StatelessWidget {
   final int pageId;
-  RecommendedItemDetail({super.key, required this.pageId});
+  final ProductType productType;
+  ItemDetail({super.key, required this.pageId, required this.productType});
 
   @override
   Widget build(BuildContext context) {
-    var product = Get.find<RecommendedProductController>().productList[pageId];
-    Get.find<RecommendedProductController>()
+    var product =
+        Get.find<ProductController>().getProductList(productType)[pageId];
+    Get.find<ProductController>()
         .initProduct(product, Get.find<CartController>());
     return Scaffold(
       body: CustomScrollView(
@@ -30,9 +32,8 @@ class RecommendedItemDetail extends StatelessWidget {
                 GestureDetector(
                     onTap: () => Get.back(),
                     child: AppIcon(icon: Icons.arrow_back)),
-                GetBuilder<RecommendedProductController>(builder: (controller) {
-                  var items =
-                      Get.find<RecommendedProductController>().totalCartItems;
+                GetBuilder<ProductController>(builder: (controller) {
+                  var items = Get.find<ProductController>().totalCartItems;
                   return Stack(
                     children: [
                       AppIcon(icon: Icons.shopping_cart_checkout_outlined),
@@ -82,7 +83,7 @@ class RecommendedItemDetail extends StatelessWidget {
             backgroundColor: AppColors.yellowColor,
             flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
-                    tag: "recommended-item-$pageId",
+                    tag: "$productType-item-$pageId",
                     child: Image.network(
                       AppConsts.baseUrl + AppConsts.uploadUri + product.img!,
                       width: double.maxFinite,
@@ -101,7 +102,7 @@ class RecommendedItemDetail extends StatelessWidget {
           )
         ],
       ),
-      bottomNavigationBar: GetBuilder<RecommendedProductController>(
+      bottomNavigationBar: GetBuilder<ProductController>(
           builder: (recommendedProductController) {
         return Column(mainAxisSize: MainAxisSize.min, children: [
           Container(

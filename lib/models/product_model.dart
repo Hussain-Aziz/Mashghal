@@ -13,7 +13,7 @@ class ProductModel {
       this.location,
       this.createdAt,
       this.updatedAt,
-      this.typeId});
+      this.type_id});
 
   int? id;
   String? name;
@@ -24,7 +24,7 @@ class ProductModel {
   String? location;
   String? createdAt;
   String? updatedAt;
-  int? typeId;
+  int? type_id;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

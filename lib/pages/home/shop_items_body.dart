@@ -1,8 +1,7 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mushaghal/controllers/popular_product_controller.dart';
-import 'package:mushaghal/controllers/recommended_product_controller.dart';
+import 'package:mushaghal/controllers/product_controller.dart';
 import 'package:mushaghal/models/product_model.dart';
 import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
@@ -11,8 +10,7 @@ import 'package:mushaghal/widgets/app_column.dart';
 import 'package:mushaghal/widgets/big_text.dart';
 import 'package:mushaghal/widgets/icon_and_text_widget.dart';
 import 'package:mushaghal/widgets/small_text.dart';
-
-import '../../utils/dimensions.dart';
+import 'package:mushaghal/utils/dimensions.dart';
 
 class ShopItemsBody extends StatefulWidget {
   const ShopItemsBody({Key? key}) : super(key: key);
@@ -48,28 +46,28 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      GetBuilder<PopularProductController>(builder: (popularProducts) {
-        return popularProducts.isLoaded
+      GetBuilder<ProductController>(builder: (products) {
+        return products.isLoaded
             ? Container(
                 height: Dimensions.pageViewHeight,
                 child: PageView.builder(
                     //for the scrollable thing
-                    itemCount: popularProducts.productList.length,
+                    itemCount: products.popularProductList.length,
                     controller: pageController,
                     itemBuilder: (context, position) {
                       return buildHorizontalScrollingItem(
-                          position, popularProducts.productList[position]);
+                          position, products.popularProductList[position]);
                     }),
               )
             : CircularProgressIndicator(
                 color: AppColors.mainColor,
               );
       }),
-      GetBuilder<PopularProductController>(builder: (popularProducts) {
+      GetBuilder<ProductController>(builder: (products) {
         return DotsIndicator(
-          dotsCount: popularProducts.productList.length <= 0
+          dotsCount: products.popularProductList.length <= 0
               ? 1
-              : popularProducts.productList.length,
+              : products.popularProductList.length,
           position: currentPage,
           decorator: DotsDecorator(
             activeColor: AppColors.mainColor,
@@ -88,14 +86,14 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
       ),
 
       ///list of items
-      GetBuilder<RecommendedProductController>(builder: (recommendedProduct) {
-        return recommendedProduct.isLoaded
+      GetBuilder<ProductController>(builder: (product) {
+        return product.isLoaded
             ? ListView.builder(
                 shrinkWrap: true,
 
                 ///makes it not possible to scroll the list. you have to scroll how its parent scrolls
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: recommendedProduct.productList.length,
+                itemCount: product.recommendedProductList.length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () =>
@@ -106,7 +104,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                       child: Row(
                         children: [
                           Hero(
-                            tag: "recommended-item-$index",
+                            tag: "${ProductType.recommended}-item-$index",
                             child: Container(
                               width: Dimensions.listViewImageSize,
                               height: Dimensions.listViewImageSize,
@@ -117,8 +115,8 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                   image: DecorationImage(
                                       image: NetworkImage(AppConsts.baseUrl +
                                           AppConsts.uploadUri +
-                                          recommendedProduct
-                                              .productList[index].img!),
+                                          product.recommendedProductList[index]
+                                              .img!),
                                       fit: BoxFit.cover)),
                             ),
                           ),
@@ -138,12 +136,14 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     BigText(
-                                        text: recommendedProduct
-                                            .productList[index].name!),
+                                        text: product
+                                            .recommendedProductList[index]
+                                            .name!),
                                     SizedBox(height: 10.scale()),
                                     SmallText(
-                                        text: recommendedProduct
-                                            .productList[index].description!),
+                                        text: product
+                                            .recommendedProductList[index]
+                                            .description!),
                                     SizedBox(height: 10.scale()),
                                     Row(
                                       mainAxisAlignment:
@@ -207,7 +207,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
           GestureDetector(
             onTap: () => Get.toNamed(RouteHelper.getPopularItem(index)),
             child: Hero(
-              tag: "popular-item-$index",
+              tag: "${ProductType.popular}-item-$index",
               child: Container(
                 height: height,
                 margin: EdgeInsets.symmetric(

@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:mushaghal/data/api/api_client.dart';
 import 'package:mushaghal/utils/consts.dart';
 
-abstract class ProductRepo extends GetxService {
+class ProductRepo extends GetxService {
   final ApiClient apiClient;
 
   ProductRepo({required this.apiClient});
 
-  Future<Response> getProductList();
+  Future<Response> getProductList() async => await apiClient.getData(AppConsts.productsUri);
 }
