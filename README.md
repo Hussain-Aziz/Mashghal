@@ -1,16 +1,6 @@
-# mushaghal
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![logo](./assets/images/mushaghal_logo.png)  
+![build](https://github.com/Hussain-Aziz/Mushaghal-Mobile-App/actions/workflows/build.yml/badge.svg) ![](https://tokei.rs/b1/github/Hussain-Aziz/Mushaghal-Mobile-App?category=lines) ![](https://img.shields.io/github/languages/top/Hussain-Aziz/Mushaghal-Mobile-App)
+#### The Idea
+Mashghal is an online ecommerce platform similar to etsy that enables individuals and small businesses to set up an online shop and sell their one-of-a-kind, handmade, or vintage goods, with a focus on providing clients with high-quality, locally sourced products. To make it simple for shoppers to find the products they are looking for, we will also offer a user-friendly interface, simple search, and gifting capabilities. 
+## App Preview
+![splash](./assets/images/splash_screen.png) ![home](./assets/images/home_page.png) ![show](./assets/images/add_item.png)
