@@ -1,9 +1,9 @@
-name: Build
+name: Build Android
 
 on: [push, pull_request]
 
 jobs:
-    build-linux:
+    build-apk:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
@@ -13,7 +13,7 @@ jobs:
             - name: Build
               run: |
                 flutter build apk
-                mv ./build/app/outputs/flutter-apk/app-release.apk ./mashghal.apk
+                mv ./build/app/outputs/flutter-apk/app-debug.apk ./mashghal.apk
             - name: Upload Binary
               uses: actions/upload-artifact@v3
               with:
