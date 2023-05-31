@@ -6,16 +6,17 @@ import 'package:mushaghal/widgets/small_text.dart';
 import '../utils/colors.dart';
 import '../utils/dimensions.dart';
 
-class AppColumn extends StatelessWidget {
-  final String text;
-  const AppColumn({Key? key, required this.text}) : super(key: key);
+class ShopColumn extends StatelessWidget {
+  final String name;
+  final String description;
+  const ShopColumn({super.key, required this.name, required this.description});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BigText(text: text, size: 26.scale()),
+        Center(child: BigText(text: name, size: 26.scale())),
         SizedBox(height: 10.scale()),
         Row(
           children: [
@@ -24,7 +25,7 @@ class AppColumn extends StatelessWidget {
               children: List.generate(
                   5,
                   (index) => const Icon(Icons.star,
-                      color: AppColors.mainColor, size: 15)),
+                      color: AppColors.iconColor2, size: 15)),
             ),
             const SizedBox(width: 10),
             SmallText(text: "4.5"),
@@ -35,18 +36,9 @@ class AppColumn extends StatelessWidget {
           ],
         ),
         SizedBox(height: 20.scale()),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            IconAndTextWidget(
-                icon: Icons.circle_sharp,
-                text: "Normal",
-                iconColor: AppColors.iconColor1),
-            IconAndTextWidget(
-                icon: Icons.access_time_rounded,
-                text: "32 min",
-                iconColor: AppColors.iconColor2),
-          ],
+        SmallText(
+          text: description,
+          color: Color.fromARGB(255, 114, 114, 114),
         ),
       ],
     );

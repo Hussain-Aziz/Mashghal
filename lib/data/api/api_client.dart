@@ -3,18 +3,24 @@ import 'package:mushaghal/utils/consts.dart';
 
 class ApiClient extends GetConnect implements GetxService {
   late String token;
-  final String appBaseUrl;
+  late String appBaseUrl;
+  bool isLocal = false;
 
   late Map<String, String> _mainHeaders;
 
-  ApiClient({required this.appBaseUrl}) {
-    baseUrl = appBaseUrl;
-    timeout = const Duration(seconds: 30);
-    token = AppConsts.token;
-    _mainHeaders = {
-      'Content-type': 'application/json; charset=UTF-8',
-      'Authorization': 'Bearer $token',
-    };
+  ApiClient({String? appBaseUrl = null}) {
+    if (appBaseUrl != null) {
+      this.appBaseUrl = appBaseUrl;
+      baseUrl = appBaseUrl;
+      timeout = const Duration(seconds: 30);
+      token = AppConsts.token;
+      _mainHeaders = {
+        'Content-type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      };
+    } else {
+      isLocal = true;
+    }
   }
 
   Future<Response> getData(String uri) async {

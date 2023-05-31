@@ -7,7 +7,8 @@ import 'package:mushaghal/utils/consts.dart';
 import 'package:mushaghal/data/repository/product_repo.dart';
 
 Future<void> init() async {
-  Get.lazyPut(() => ApiClient(appBaseUrl: AppConsts.baseUrl), fenix: true);
+  //Get.lazyPut(() => ApiClient(appBaseUrl: AppConsts.baseUrl), fenix: true);
+  Get.lazyPut(() => ApiClient(), fenix: true);
 
   Get.lazyPut(() => ProductRepo(apiClient: Get.find()), fenix: true);
   Get.lazyPut(() => CartRepo(), fenix: true);

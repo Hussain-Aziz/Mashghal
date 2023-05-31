@@ -6,9 +6,9 @@ import 'package:mushaghal/models/product_model.dart';
 import 'package:mushaghal/routes/route_helper.dart';
 import 'package:mushaghal/utils/colors.dart';
 import 'package:mushaghal/utils/consts.dart';
-import 'package:mushaghal/widgets/app_column.dart';
 import 'package:mushaghal/widgets/big_text.dart';
 import 'package:mushaghal/widgets/icon_and_text_widget.dart';
+import 'package:mushaghal/widgets/shop_column.dart';
 import 'package:mushaghal/widgets/small_text.dart';
 import 'package:mushaghal/utils/dimensions.dart';
 
@@ -113,8 +113,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                                       BorderRadius.circular(20.scale()),
                                   color: Colors.white38,
                                   image: DecorationImage(
-                                      image: NetworkImage(AppConsts.baseUrl +
-                                          AppConsts.uploadUri +
+                                      image: AssetImage(AppConsts.uploadUri +
                                           product.recommendedProductList[index]
                                               .img!),
                                       fit: BoxFit.cover)),
@@ -221,8 +220,7 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                     //just in case image doesn't load
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(AppConsts.baseUrl +
-                          AppConsts.uploadUri +
+                      image: AssetImage(AppConsts.uploadUri +
                           productModel.img!),
                     )),
               ),
@@ -260,7 +258,10 @@ class _ShopItemsBodyState extends State<ShopItemsBody> {
                   ///for padding
                   padding: EdgeInsets.fromLTRB(
                       15.scale(), 15.scale(), 15.scale(), 0),
-                  child: AppColumn(text: productModel.name!),
+                  child: ShopColumn(
+                    name: productModel.name!,
+                    description: productModel.description!,
+                  ),
                 )),
           ),
         ],

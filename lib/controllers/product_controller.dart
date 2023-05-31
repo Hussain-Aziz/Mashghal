@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:mushaghal/controllers/cart_controller.dart';
 import 'package:mushaghal/data/repository/product_repo.dart';
 import 'package:mushaghal/models/product.dart';
 import 'package:mushaghal/models/product_model.dart';
 import 'package:mushaghal/utils/extensions.dart';
+import 'package:flutter/services.dart';
 
 enum ProductType {
   popular,
@@ -17,8 +20,9 @@ class ProductController extends GetxController {
 
   List<ProductModel> _productList = [];
   List<ProductModel> get productList => _productList;
-  List<ProductModel> get popularProductList =>
-      _productList.where((e) => e.type_id == ProductType.popular.index).toList();
+  List<ProductModel> get popularProductList => _productList
+      .where((e) => e.type_id == ProductType.popular.index)
+      .toList();
   List<ProductModel> get recommendedProductList => _productList
       .where((e) => e.type_id == ProductType.recommended.index)
       .toList();
@@ -32,13 +36,22 @@ class ProductController extends GetxController {
   late CartController _cart;
 
   Future<void> fetchProductList() async {
-    Response response = await productRepo.getProductList();
-    if (response.statusCode == 200) {
+    if (!productRepo.apiClient.isLocal) {
+      Response response = await productRepo.getProductList();
+      if (response.statusCode == 200) {
+        _productList = [];
+        _productList.addAll(Product.fromJson(response.body).products);
+        _isLoaded = true;
+        update();
+      }
+    } else {
       _productList = [];
-      _productList.addAll(Product.fromJson(response.body).products);
+      var json =
+          jsonDecode(await rootBundle.loadString('assets/products.json'));
+      _productList.addAll(Product.fromJson(json).products);
       _isLoaded = true;
       update();
-    } else {}
+    }
   }
 
   void addQuantity({bool decrement = false}) {

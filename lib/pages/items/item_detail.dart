@@ -84,8 +84,7 @@ class ItemDetail extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
                 background: Hero(
                     tag: "$productType-item-$pageId",
-                    child: Image.network(
-                      AppConsts.baseUrl + AppConsts.uploadUri + product.img!,
+                    child: Image.asset(AppConsts.uploadUri + product.img!,
                       width: double.maxFinite,
                       fit: BoxFit.cover,
                     ))),
